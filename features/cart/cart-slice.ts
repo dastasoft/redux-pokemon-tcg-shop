@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { IPokemonCard } from 'types'
 
+export interface IStoredPokemonCard extends IPokemonCard {
+  uuid: string
+}
 interface CartState {
-  cards: any[]
+  cards: IStoredPokemonCard[]
   totalPrice: number
 }
 
@@ -15,20 +19,32 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem(state, action: PayloadAction<IPokemonCard>) {
+    addItem(state, action: PayloadAction<IStoredPokemonCard>) {
       const pokemonCard = action.payload
+
       state.cards.push(pokemonCard)
-      state.totalPrice += pokemonCard.cardmarket.prices.averageSellPrice
+      state.totalPrice = Number(
+        state.cards
+          .reduce(
+            (acc, curr) => acc + curr.cardmarket.prices.averageSellPrice,
+            0
+          )
+          .toFixed(2)
+      )
     },
     removeItem(state, action: PayloadAction<string>) {
-      const pokemonCardId = action.payload
-      const index = state.cards.findIndex(({ id }) => id === pokemonCardId)
+      const pokemonCardUUID = action.payload
+      const cards = state.cards.filter(({ uuid }) => uuid !== pokemonCardUUID)
 
-      if (index > -1) {
-        state.totalPrice -=
-          state.cards[index].cardmarket.prices.averageSellPrice
-        state.cards = state.cards.slice(index, 1)
-      }
+      state.cards = cards
+      state.totalPrice = Number(
+        state.cards
+          .reduce(
+            (acc, curr) => acc + curr.cardmarket.prices.averageSellPrice,
+            0
+          )
+          .toFixed(2)
+      )
     },
   },
 })
