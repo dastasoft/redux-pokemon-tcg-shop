@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { MinusIcon } from '@chakra-ui/icons'
 import { Image } from '@chakra-ui/image'
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/layout'

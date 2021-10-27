@@ -1,27 +1,13 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable import/no-extraneous-dependencies */
 import { useState } from 'react'
-import { Box, Text, SimpleGrid, Heading, Flex, Spacer } from '@chakra-ui/layout'
-import { Input } from '@chakra-ui/input'
-import { IconButton } from '@chakra-ui/button'
-import { SearchIcon } from '@chakra-ui/icons'
-import { Select } from '@chakra-ui/select'
-import { v4 as uuidv4 } from 'uuid'
+import { Box, Text, Flex } from '@chakra-ui/layout'
 
-import { useAppDispatch } from 'app/hooks'
 import Layout from 'components/Layout'
 import Pagination from 'components/Pagination'
-import Limit from 'components/Limit'
-import { addItem } from 'features/cart/cart-slice'
+import SearchByName from 'components/SearchByName'
+import OrderBy, { ORDER_BY } from 'components/OrderBy'
 import { useFetchCardsQuery } from 'features/pokemonTCGAPI/pokemon-tcg-api-slice'
 import Cart from 'features/cart/Cart'
-import Card from 'components/Card'
-
-const enum ORDER_BY {
-  SET_RELEASE_DATE = '-set.releaseDate',
-  AVERAGE_SELL_PRICE = '-cardmarket.prices.averageSellPrice',
-  NATIONAL_POKEDEX_NUMBER = '-nationalPokedexNumbers',
-}
+import CardHolder from 'components/CardHolder'
 
 export default function Home() {
   const [inputName, setInputName] = useState('')
@@ -36,7 +22,6 @@ export default function Home() {
     pageSize,
     orderBy,
   })
-  const dispatch = useAppDispatch()
 
   console.log(data)
 
@@ -53,69 +38,30 @@ export default function Home() {
 
   return (
     <Layout cart={<Cart />}>
-      <Box m="5">
-        <Flex justifyContent="space-between" alignItems="center" my="2">
-          <Box>
-            <Heading>Search</Heading>
-            <Flex>
-              <Input
-                placeholder="Name"
-                value={inputName}
-                onChange={(e) => setInputName(e.target.value)}
-                mr="4"
-              />
-              <Spacer />
-              <IconButton
-                aria-label="Search database"
-                icon={<SearchIcon />}
-                onClick={onSearchByNameHandler}
-                colorScheme="teal"
-              />
-            </Flex>
-          </Box>
-          <Box>
-            <Heading as="h2">Order By</Heading>
-            <Select
-              value={orderBy}
-              onChange={(e: any) => setOrderBy(e.target.value)}
-            >
-              <option value={ORDER_BY.SET_RELEASE_DATE}>
-                Set Release Date
-              </option>
-              <option value={ORDER_BY.AVERAGE_SELL_PRICE}>
-                Average Sell Price
-              </option>
-              <option value={ORDER_BY.NATIONAL_POKEDEX_NUMBER}>
-                National Pokedex Number
-              </option>
-            </Select>
-          </Box>
-        </Flex>
-        <SimpleGrid columns={[1, 1, 2, 3, 5]} spacing="2rem" my="2">
-          {data?.data.map((card) => {
-            return (
-              <Card
-                key={card.id}
-                {...card}
-                onAdd={() => dispatch(addItem({ uuid: uuidv4(), ...card }))}
-              />
-            )
-          })}
-        </SimpleGrid>
-        <Flex justifyContent="space-between" alignItems="center" my="2">
-          <Pagination
-            page={page}
-            pageSize={data!.pageSize}
-            totalCount={data!.totalCount}
-            dispatcher={(newPage) => setPage(newPage)}
+      <Box my="4">
+        <Flex
+          justifyContent="space-between"
+          alignItems="center"
+          mb="6"
+          wrap="wrap"
+        >
+          <SearchByName
+            value={inputName}
+            onChange={setInputName}
+            onSearch={onSearchByNameHandler}
           />
+          <OrderBy value={orderBy} onChange={setOrderBy} />
+        </Flex>
 
-          <Limit
-            onPageSizeChangeHandler={(e: any) => setPageSize(e.target.value)}
-            pageSizes={[20, 50, 100, 200, 250]}
-            value={pageSize}
-          />
-        </Flex>
+        <CardHolder data={data?.data} />
+        <Pagination
+          page={page}
+          pageSize={data!.pageSize}
+          totalCount={data!.totalCount}
+          onPageChange={(newPage) => setPage(newPage)}
+          onPageSizeChange={(e: any) => setPageSize(e.target.value)}
+          pageSizes={[20, 50, 100, 200, 250]}
+        />
       </Box>
     </Layout>
   )

@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { ORDER_BY } from 'components/OrderBy'
 import { IResponse } from 'types'
 
 interface IQueryParams {
@@ -26,7 +27,7 @@ export const apiSlice = createApi({
           name = '',
           page = 1,
           pageSize = 20,
-          orderBy = '-set.releaseDate',
+          orderBy = ORDER_BY.SET_RELEASE_DATE,
         }: IQueryParams) {
           const queryName = name ? `&q=name:${name}` : ''
           return `/cards?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}${queryName}`

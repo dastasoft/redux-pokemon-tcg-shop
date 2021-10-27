@@ -43,6 +43,7 @@
     "react/react-in-jsx-scope": 0,
     "react/jsx-props-no-spreading": 0,
     "arrow-body-style": 0,
-    "import/extensions": 0
+    "import/extensions": 0,
+    "import/no-extraneous-dependencies": 0
   }
 }

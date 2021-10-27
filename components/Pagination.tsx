@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+import { ChangeEvent } from 'react'
 import { HStack, Text } from '@chakra-ui/layout'
 import { IconButton } from '@chakra-ui/button'
 import {
@@ -7,38 +7,43 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons'
+import { Select } from '@chakra-ui/select'
 
 export interface IPagination {
   page: number
   pageSize: number
   totalCount: number
-  dispatcher: (page: number) => void
+  onPageChange: (page: number) => void
+  onPageSizeChange: (e: ChangeEvent<HTMLSelectElement>) => void
+  pageSizes: number[]
 }
 
 export default function Pagination({
   page,
   pageSize,
   totalCount,
-  dispatcher,
+  onPageChange,
+  onPageSizeChange,
+  pageSizes,
 }: IPagination) {
   const totalPages = Math.ceil(totalCount / pageSize)
   const canPrev = page > 1
   const canNext = page < totalPages
 
   const onFirstHandler = () => {
-    dispatcher(1)
+    onPageChange(1)
   }
 
   const onPrevHandler = () => {
-    dispatcher(page - 1)
+    onPageChange(page - 1)
   }
 
   const onNextHandler = () => {
-    dispatcher(page + 1)
+    onPageChange(page + 1)
   }
 
   const onLastHandler = () => {
-    dispatcher(totalPages)
+    onPageChange(totalPages)
   }
 
   return (
@@ -70,6 +75,13 @@ export default function Pagination({
         icon={<ArrowRightIcon />}
         onClick={onLastHandler}
       />
+      <Select value={pageSize} onChange={onPageSizeChange}>
+        {pageSizes.map((items) => (
+          <option key={items} value={items}>
+            {items}/page
+          </option>
+        ))}
+      </Select>
     </HStack>
   )
 }

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import cartReducer from 'features/cart/cart-slice'
 
+import cartReducer from 'features/cart/cart-slice'
 import { apiSlice } from 'features/pokemonTCGAPI/pokemon-tcg-api-slice'
 
 export const store = configureStore({

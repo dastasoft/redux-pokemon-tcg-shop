@@ -1,8 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { Button } from '@chakra-ui/button'
-import { AddIcon } from '@chakra-ui/icons'
 import { Image } from '@chakra-ui/image'
 import { Flex, Heading } from '@chakra-ui/layout'
+import { BsCartPlusFill } from 'react-icons/bs'
 
 import { IPokemonCard } from 'types'
 
@@ -19,7 +18,7 @@ export default function Card({ id, name, images, cardmarket, onAdd }: ICard) {
       {images.large && <Image src={images.large} />}
 
       <Button
-        leftIcon={<AddIcon />}
+        leftIcon={<BsCartPlusFill />}
         colorScheme="teal"
         variant="solid"
         onClick={onAdd}
