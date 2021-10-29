@@ -1,34 +1,41 @@
-import { MinusIcon } from '@chakra-ui/icons'
-import { Image } from '@chakra-ui/image'
-import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/layout'
+import { Button } from '@chakra-ui/button'
+import { Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/layout'
 
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import Card from 'components/Card'
 import { removeItem } from './cart-slice'
 
 export default function Cart() {
   const { cards, totalPrice } = useAppSelector((state) => state.cart)
   const dispatch = useAppDispatch()
+  const areCards = cards.length > 0
 
   return (
-    <Box>
-      <SimpleGrid columns={[1, 2]} spacing="2rem" my="2">
-        {cards?.map((card) => {
-          const { uuid, images, cardmarket } = card
-          return (
-            <Box key={uuid}>
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text>${cardmarket?.prices?.averageSellPrice}</Text>
-                <MinusIcon
-                  cursor="pointer"
-                  onClick={() => dispatch(removeItem(uuid!))}
-                />
-              </Flex>
-              {images.large && <Image src={images.large} />}
-            </Box>
-          )
-        })}
-      </SimpleGrid>
-      <Text>Total price is: {totalPrice}</Text>
-    </Box>
+    <Flex flexDir="column" alignItems="center">
+      <VStack spacing="3" mb="8">
+        <Heading as="h3" fontSize="md">
+          {areCards
+            ? `Total price is: $${totalPrice}`
+            : `There are no cards in the cart`}
+        </Heading>
+        {areCards && <Button colorScheme="messenger">Checkout</Button>}
+      </VStack>
+      {areCards && (
+        <>
+          <Heading as="h4" fontSize="md">
+            Your items
+          </Heading>
+          <SimpleGrid columns={[1, 1, 2]} spacing="2rem" my="2">
+            {cards?.map((card) => (
+              <Card
+                key={card.uuid}
+                {...card}
+                onRemove={() => dispatch(removeItem(card.uuid!))}
+              />
+            ))}
+          </SimpleGrid>
+        </>
+      )}
+    </Flex>
   )
 }

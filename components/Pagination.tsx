@@ -1,30 +1,30 @@
 import { ChangeEvent } from 'react'
-import { HStack, Text } from '@chakra-ui/layout'
+import { Flex, HStack, Text } from '@chakra-ui/layout'
 import { IconButton } from '@chakra-ui/button'
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from '@chakra-ui/icons'
 import { Select } from '@chakra-ui/select'
+import {
+  MdFirstPage,
+  MdChevronLeft,
+  MdChevronRight,
+  MdLastPage,
+} from 'react-icons/md'
 
 export interface IPagination {
   page: number
-  pageSize: number
-  totalCount: number
+  pageSize?: number
+  totalCount?: number
   onPageChange: (page: number) => void
   onPageSizeChange: (e: ChangeEvent<HTMLSelectElement>) => void
-  pageSizes: number[]
+  pageSizes?: number[]
 }
 
 export default function Pagination({
-  page,
-  pageSize,
-  totalCount,
+  page = 1,
+  pageSize = 1,
+  totalCount = 0,
   onPageChange,
   onPageSizeChange,
-  pageSizes,
+  pageSizes = [20, 50, 100, 200, 250],
 }: IPagination) {
   const totalPages = Math.ceil(totalCount / pageSize)
   const canPrev = page > 1
@@ -47,41 +47,58 @@ export default function Pagination({
   }
 
   return (
-    <HStack spacing="1">
-      <IconButton
-        aria-label="Paginate to the first page"
-        disabled={!canPrev}
-        icon={<ArrowLeftIcon />}
-        onClick={onFirstHandler}
-      />
-      <IconButton
-        aria-label="Paginate back"
-        disabled={!canPrev}
-        icon={<ChevronLeftIcon />}
-        onClick={onPrevHandler}
-      />
-      <Text>
-        Page {page} of {totalPages}
-      </Text>
-      <IconButton
-        aria-label="Paginate forward"
-        disabled={!canNext}
-        icon={<ChevronRightIcon />}
-        onClick={onNextHandler}
-      />
-      <IconButton
-        aria-label="Paginate to the last page"
-        disabled={!canNext}
-        icon={<ArrowRightIcon />}
-        onClick={onLastHandler}
-      />
-      <Select value={pageSize} onChange={onPageSizeChange}>
+    <Flex justifyContent="center" alignItems="center" mt="8" mb="16">
+      <HStack spacing="2" minW="fit-content" mr="2">
+        <IconButton
+          aria-label="Paginate to the first page"
+          disabled={!canPrev}
+          colorScheme="messenger"
+          icon={<MdFirstPage />}
+          onClick={onFirstHandler}
+        />
+        <IconButton
+          aria-label="Paginate back"
+          disabled={!canPrev}
+          colorScheme="messenger"
+          icon={<MdChevronLeft />}
+          onClick={onPrevHandler}
+        />
+        <Text
+          border="1px"
+          borderColor="messenger.200"
+          px="4"
+          py="2"
+          borderRadius="md"
+        >
+          Page {page} of {totalPages}
+        </Text>
+        <IconButton
+          aria-label="Paginate forward"
+          disabled={!canNext}
+          colorScheme="messenger"
+          icon={<MdChevronRight />}
+          onClick={onNextHandler}
+        />
+        <IconButton
+          aria-label="Paginate to the last page"
+          disabled={!canNext}
+          colorScheme="messenger"
+          icon={<MdLastPage />}
+          onClick={onLastHandler}
+        />
+      </HStack>
+      <Select
+        value={pageSize}
+        onChange={onPageSizeChange}
+        w="fit-content"
+        borderColor="messenger.200"
+      >
         {pageSizes.map((items) => (
           <option key={items} value={items}>
             {items}/page
           </option>
         ))}
       </Select>
-    </HStack>
+    </Flex>
   )
 }

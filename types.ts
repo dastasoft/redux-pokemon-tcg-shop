@@ -10,6 +10,7 @@ export interface IResponse {
 export interface IPokemonCard {
   id: string
   name: string
+  rarity: string
   images: {
     small: string
     large: string

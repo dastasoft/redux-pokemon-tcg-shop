@@ -17,13 +17,15 @@ export default function SearchByName({
 }: ISearchByName) {
   return (
     <Box>
-      <Heading>Search</Heading>
+      <Heading fontSize="xl" mb="2">
+        Search
+      </Heading>
       <Flex>
         <Input
           placeholder="Name"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          mr="4"
+          mr="2"
         />
         <Spacer />
         <IconButton

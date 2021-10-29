@@ -17,7 +17,9 @@ export interface IOrderBy {
 export default function OrderBy({ value, onChange }: IOrderBy) {
   return (
     <Box>
-      <Heading as="h2">Order By</Heading>
+      <Heading as="h2" fontSize="xl" mb="2">
+        Order By
+      </Heading>
       <Select value={value} onChange={(e: any) => onChange(e.target.value)}>
         <option value={ORDER_BY.SET_RELEASE_DATE}>Set Release Date</option>
         <option value={ORDER_BY.AVERAGE_SELL_PRICE}>Average Sell Price</option>

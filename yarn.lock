@@ -769,6 +769,16 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/aclonica@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/aclonica/-/aclonica-4.5.0.tgz#c433b63f27487e773baf7295bd94ae2ffe3409c3"
+  integrity sha512-y5yAeYLr8VR21np0gIJFst12n6j7RFIsfoiA/8HofoKSTVKyWBP0FtjkUZqrKS5IGhQrqgVaQz4s7AwI4lmITw==
+
+"@fontsource/raleway@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/raleway/-/raleway-4.5.0.tgz#d5c464abe655d2e2cb134c503db455b7af6c03a6"
+  integrity sha512-Rzj90wbZQnNzazqzoiu5HzMEMdqMJLUVFOo699sinTXrZRm1aB5iX2HTiK2VlPnH4M6u8yYnJ7CebOyamfWlqw==
+
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"
