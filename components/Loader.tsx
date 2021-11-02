@@ -1,6 +1,9 @@
 import { ReactChild } from 'react'
-import { Flex, Text } from '@chakra-ui/layout'
+import { Flex, SimpleGrid, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
+
+import CardSekeleton from './CardSekeleton'
+import PaginationSekeleton from './PaginationSekeleton'
 
 export interface ILoader {
   isLoading: boolean
@@ -20,6 +23,27 @@ export default function Loader({ isLoading, isError, children }: ILoader) {
           size="xl"
         />
       </Flex>
+    )
+  }
+
+  if (isError) {
+    return <Text>The search has returned nothing...</Text>
+  }
+
+  return <>{children}</>
+}
+
+export const SkeletonLoader = ({ isLoading, isError, children }: ILoader) => {
+  if (isLoading) {
+    return (
+      <>
+        <SimpleGrid columns={[1, 2, 2, 3, 5]} spacing="2rem" my="2">
+          {Array.from({ length: 20 }, (_e, i) => i).map((_el, index) => (
+            <CardSekeleton key={index} />
+          ))}
+        </SimpleGrid>
+        <PaginationSekeleton />
+      </>
     )
   }
 

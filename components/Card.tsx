@@ -1,6 +1,6 @@
+import NextImage from 'next/image'
 import { Button } from '@chakra-ui/button'
-import { Image } from '@chakra-ui/image'
-import { Badge, Flex, Heading } from '@chakra-ui/layout'
+import { Badge, Box, Flex, Heading } from '@chakra-ui/layout'
 import { MdAddShoppingCart, MdRemoveShoppingCart } from 'react-icons/md'
 
 import { IPokemonCard } from 'types'
@@ -30,7 +30,14 @@ export default function Card({
         </Badge>
       </Flex>
 
-      {images.large && <Image src={images.large} />}
+      <Box
+        minH={['md', 'xs', 'xl', 'md', 'xs']}
+        position="relative"
+      >
+        {images.small && (
+          <NextImage src={images.small} alt={name} layout="fill" />
+        )}
+      </Box>
 
       <Button
         leftIcon={onAdd ? <MdAddShoppingCart /> : <MdRemoveShoppingCart />}

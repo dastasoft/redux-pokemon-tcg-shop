@@ -25,7 +25,7 @@ export default function Cart() {
           <Heading as="h4" fontSize="md">
             Your items
           </Heading>
-          <SimpleGrid columns={[1, 1, 2]} spacing="2rem" my="2">
+          <SimpleGrid columns={1} spacing="2rem" my="2" w="full">
             {cards?.map((card) => (
               <Card
                 key={card.uuid}

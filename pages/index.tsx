@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import { Box, Grid } from '@chakra-ui/layout'
+import { Box, Grid, Text } from '@chakra-ui/layout'
 
 import Layout from 'components/Layout'
 import Pagination from 'components/Pagination'
 import SearchByName from 'components/SearchByName'
 import OrderBy, { ORDER_BY } from 'components/OrderBy'
+import CardHolder from 'components/CardHolder'
+import { SkeletonLoader } from 'components/Loader'
 import { useFetchCardsQuery } from 'features/pokemonTCGAPI/pokemon-tcg-api-slice'
 import Cart from 'features/cart/Cart'
-import CardHolder from 'components/CardHolder'
-import Loader from 'components/Loader'
 
 export default function Home() {
   const [inputName, setInputName] = useState('')
@@ -24,6 +24,16 @@ export default function Home() {
     orderBy,
   })
 
+  const resetPagination = () => {
+    setPage(1)
+    setPageSize(20)
+  }
+
+  const onSearch = () => {
+    setName(inputName)
+    resetPagination()
+  }
+
   return (
     <Layout cart={<Cart />}>
       <Box my="4" w="full" h="full">
@@ -36,23 +46,29 @@ export default function Home() {
           <SearchByName
             value={inputName}
             onChange={setInputName}
-            onSearch={() => setName(inputName)}
+            onSearch={onSearch}
           />
           <OrderBy value={orderBy} onChange={setOrderBy} />
         </Grid>
 
-        <Loader isLoading={isLoading || isFetching} isError={isError}>
+        <SkeletonLoader isLoading={isLoading || isFetching} isError={isError}>
           <>
-            <CardHolder data={data?.data} />
-            <Pagination
-              page={page}
-              pageSize={data?.pageSize}
-              totalCount={data?.totalCount}
-              onPageChange={(newPage) => setPage(newPage)}
-              onPageSizeChange={(e: any) => setPageSize(e.target.value)}
-            />
+            {data && data.data.length > 0 ? (
+              <>
+                <CardHolder data={data?.data} />
+                <Pagination
+                  page={page}
+                  pageSize={data?.pageSize}
+                  totalCount={data?.totalCount}
+                  onPageChange={(newPage) => setPage(newPage)}
+                  onPageSizeChange={(e: any) => setPageSize(e.target.value)}
+                />
+              </>
+            ) : (
+              <Text>The search has returned nothing...</Text>
+            )}
           </>
-        </Loader>
+        </SkeletonLoader>
       </Box>
     </Layout>
   )
