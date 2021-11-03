@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from 'react'
+import { MutableRefObject, ReactNode, useRef } from 'react'
 import { useDisclosure } from '@chakra-ui/hooks'
 import { Flex } from '@chakra-ui/layout'
 import {
@@ -9,7 +9,9 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from '@chakra-ui/modal'
-import Header from './Header'
+
+import Header from 'components/Header'
+import Footer from 'components/Footer'
 
 interface ILayout {
   children?: ReactNode
@@ -18,14 +20,18 @@ interface ILayout {
 
 export default function Layout({ children, cart }: ILayout) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef()
+  const btnRef = useRef<HTMLButtonElement>(null)
 
   return (
     <>
-      <Header onOpen={onOpen} btnRef={btnRef} />
+      <Header
+        onOpen={onOpen}
+        btnRef={btnRef as MutableRefObject<HTMLButtonElement>}
+      />
       <Flex as="main" w="full" pt="72px" px="4">
         {children}
       </Flex>
+      <Footer />
       <Drawer
         isOpen={isOpen}
         placement="right"

@@ -1,9 +1,12 @@
 import { MutableRefObject } from 'react'
 import { IconButton } from '@chakra-ui/button'
 import { Box, Circle, Flex, Heading } from '@chakra-ui/layout'
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode'
 import { MdShoppingCart } from 'react-icons/md'
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 
 import { useAppSelector } from 'app/hooks'
+import Logo from 'components/Logo'
 
 interface IHeader {
   btnRef: MutableRefObject<HTMLButtonElement>
@@ -12,6 +15,8 @@ interface IHeader {
 
 export default function Header({ btnRef, onOpen }: IHeader) {
   const totalCards = useAppSelector((state) => state.cart.cards).length
+  const { colorMode, toggleColorMode } = useColorMode()
+  const bgColor = useColorModeValue('white', 'gray.800')
 
   return (
     <Flex
@@ -23,14 +28,20 @@ export default function Header({ btnRef, onOpen }: IHeader) {
       justifyContent="space-between"
       alignItems="center"
       position="fixed"
-      bgColor="white"
+      bgColor={bgColor}
       zIndex={12}
     >
-      <Heading>Pokemon TCG Shop</Heading>
+      <Logo />
+      <IconButton
+        onClick={toggleColorMode}
+        aria-label="Toggle theme"
+        icon={colorMode === 'light' ? <BsFillMoonFill /> : <BsFillSunFill />}
+        variant="ghost"
+      />
       <Box>
         <IconButton
           ref={btnRef}
-          colorScheme="teal"
+          variant="pkmn"
           onClick={onOpen}
           aria-label="Open Cart"
           icon={<MdShoppingCart />}
@@ -38,7 +49,7 @@ export default function Header({ btnRef, onOpen }: IHeader) {
         {totalCards > 0 && (
           <Circle
             size="20px"
-            bg="tomato"
+            bg="primary"
             color="white"
             position="absolute"
             top={1}

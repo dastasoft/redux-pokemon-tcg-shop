@@ -47,25 +47,25 @@ export default function Pagination({
   }
 
   return (
-    <Flex justifyContent="center" alignItems="center" mt="8" mb="16">
+    <Flex justifyContent="center" alignItems="center" mt="16" mb="8">
       <HStack spacing="2" minW="fit-content" mr="2">
         <IconButton
+          variant="pkmn"
           aria-label="Paginate to the first page"
           disabled={!canPrev}
-          colorScheme="messenger"
           icon={<MdFirstPage />}
           onClick={onFirstHandler}
         />
         <IconButton
+          variant="pkmn"
           aria-label="Paginate back"
           disabled={!canPrev}
-          colorScheme="messenger"
           icon={<MdChevronLeft />}
           onClick={onPrevHandler}
         />
         <Text
           border="1px"
-          borderColor="messenger.200"
+          borderColor="tertiary"
           px="4"
           py="2"
           borderRadius="md"
@@ -73,16 +73,16 @@ export default function Pagination({
           Page {page} of {totalPages}
         </Text>
         <IconButton
+          variant="pkmn"
           aria-label="Paginate forward"
           disabled={!canNext}
-          colorScheme="messenger"
           icon={<MdChevronRight />}
           onClick={onNextHandler}
         />
         <IconButton
+          variant="pkmn"
           aria-label="Paginate to the last page"
           disabled={!canNext}
-          colorScheme="messenger"
           icon={<MdLastPage />}
           onClick={onLastHandler}
         />
@@ -91,7 +91,7 @@ export default function Pagination({
         value={pageSize}
         onChange={onPageSizeChange}
         w="fit-content"
-        borderColor="messenger.200"
+        borderColor="tertiary"
       >
         {pageSizes.map((items) => (
           <option key={items} value={items}>

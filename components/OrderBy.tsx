@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Dispatch, SetStateAction } from 'react'
 import { Box, Heading } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'

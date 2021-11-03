@@ -29,6 +29,7 @@ export default function SearchByName({
         />
         <Spacer />
         <IconButton
+          variant="pkmn"
           aria-label="Search database"
           icon={<SearchIcon />}
           onClick={onSearch}

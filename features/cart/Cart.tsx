@@ -18,7 +18,7 @@ export default function Cart() {
             ? `Total price is: $${totalPrice}`
             : `There are no cards in the cart`}
         </Heading>
-        {areCards && <Button colorScheme="messenger">Checkout</Button>}
+        {areCards && <Button variant="pkmn">Checkout</Button>}
       </VStack>
       {areCards && (
         <>
