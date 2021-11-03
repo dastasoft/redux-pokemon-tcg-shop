@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react'
 import { IconButton } from '@chakra-ui/button'
-import { Box, Circle, Flex, Heading } from '@chakra-ui/layout'
+import { Box, Circle, Flex } from '@chakra-ui/layout'
 import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode'
 import { MdShoppingCart } from 'react-icons/md'
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
