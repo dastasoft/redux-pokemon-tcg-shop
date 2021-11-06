@@ -1,5 +1,6 @@
 import { Flex, Stack } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/layout'
+import { useColorModeValue } from '@chakra-ui/color-mode'
 
 import Logo from 'components/Logo'
 import SocialMediaLinks from 'components/SocialMediaLinks'
@@ -14,7 +15,8 @@ export default function Footer() {
       align="center"
       justify="space-between"
       flexDirection={{ base: 'column', md: 'row' }}
-      borderTop="1px"
+      borderTopWidth={2}
+      borderTopColor={useColorModeValue('gray.200', 'gray.900')}
     >
       <Stack alignItems={{ base: 'center', md: 'flex-start' }}>
         <Logo />

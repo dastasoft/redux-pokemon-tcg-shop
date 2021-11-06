@@ -21,7 +21,7 @@ export default function Header({ btnRef, onOpen }: IHeader) {
   return (
     <Flex
       as="header"
-      borderBottom="1px"
+      shadow="lg"
       px="2"
       py="4"
       w="full"
@@ -30,35 +30,42 @@ export default function Header({ btnRef, onOpen }: IHeader) {
       position="fixed"
       bgColor={bgColor}
       zIndex={12}
+      borderTop="3px solid"
+      borderTopColor="tertiary"
+      borderBottomWidth={2}
+      borderBottomColor={useColorModeValue('gray.200', 'gray.900')}
     >
       <Logo />
-      <IconButton
-        onClick={toggleColorMode}
-        aria-label="Toggle theme"
-        icon={colorMode === 'light' ? <BsFillMoonFill /> : <BsFillSunFill />}
-        variant="ghost"
-      />
-      <Box>
+      <Flex justifyContent="flex-end" alignItems="center">
         <IconButton
-          ref={btnRef}
-          variant="pkmn"
-          onClick={onOpen}
-          aria-label="Open Cart"
-          icon={<MdShoppingCart />}
+          onClick={toggleColorMode}
+          aria-label="Toggle theme"
+          icon={colorMode === 'light' ? <BsFillMoonFill /> : <BsFillSunFill />}
+          variant="ghost"
+          mr="1"
         />
-        {totalCards > 0 && (
-          <Circle
-            size="20px"
-            bg="primary"
-            color="white"
-            position="absolute"
-            top={1}
-            right={1}
-          >
-            {totalCards}
-          </Circle>
-        )}
-      </Box>
+        <Box>
+          <IconButton
+            ref={btnRef}
+            variant="pkmn"
+            onClick={onOpen}
+            aria-label="Open Cart"
+            icon={<MdShoppingCart />}
+          />
+          {totalCards > 0 && (
+            <Circle
+              size="20px"
+              bg="primary"
+              color="white"
+              position="absolute"
+              top={2}
+              right={1}
+            >
+              {totalCards}
+            </Circle>
+          )}
+        </Box>
+      </Flex>
     </Flex>
   )
 }

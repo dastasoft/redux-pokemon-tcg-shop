@@ -23,12 +23,12 @@ export default function Layout({ children, cart }: ILayout) {
   const btnRef = useRef<HTMLButtonElement>(null)
 
   return (
-    <>
+    <Flex flexDir="column" h="100vh">
       <Header
         onOpen={onOpen}
         btnRef={btnRef as MutableRefObject<HTMLButtonElement>}
       />
-      <Flex as="main" w="full" pt="72px" px="4">
+      <Flex as="main" w="full" pt="72px" px="4" flex="1">
         {children}
       </Flex>
       <Footer />
@@ -46,6 +46,6 @@ export default function Layout({ children, cart }: ILayout) {
           <DrawerBody>{cart}</DrawerBody>
         </DrawerContent>
       </Drawer>
-    </>
+    </Flex>
   )
 }

@@ -12,7 +12,7 @@ export default function Logo() {
         ml="2"
         fontSize="xl"
         color="secondary"
-        textShadow={`-3px 0 ${tertiary}, 0 3px ${tertiary}, 3px 0 ${tertiary}, 0 -3px ${tertiary}`}
+        textShadow={`-2px 0 ${tertiary}, 0 2px ${tertiary}, 2px 0 ${tertiary}, 0 -2px ${tertiary}`}
       >
         Pokemon TCG Shop
       </Heading>

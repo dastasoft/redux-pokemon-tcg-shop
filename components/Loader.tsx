@@ -1,9 +1,10 @@
 import { ReactChild } from 'react'
-import { Flex, SimpleGrid, Text } from '@chakra-ui/layout'
+import { Flex, SimpleGrid } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 
 import CardSekeleton from './CardSekeleton'
 import PaginationSekeleton from './PaginationSekeleton'
+import { Alert, AlertIcon } from '@chakra-ui/alert'
 
 export interface ILoader {
   isLoading: boolean
@@ -27,7 +28,12 @@ export default function Loader({ isLoading, isError, children }: ILoader) {
   }
 
   if (isError) {
-    return <Text>The search has returned nothing...</Text>
+    return (
+      <Alert status="warning">
+        <AlertIcon />
+        No Pokemon match the search parameters :(
+      </Alert>
+    )
   }
 
   return <>{children}</>
@@ -48,7 +54,12 @@ export const SkeletonLoader = ({ isLoading, isError, children }: ILoader) => {
   }
 
   if (isError) {
-    return <Text>The search has returned nothing...</Text>
+    return (
+      <Alert status="warning">
+        <AlertIcon />
+        No Pokemon match the search parameters :(
+      </Alert>
+    )
   }
 
   return <>{children}</>

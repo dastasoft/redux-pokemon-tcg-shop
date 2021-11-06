@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Grid, Text } from '@chakra-ui/layout'
+import { Box, Grid } from '@chakra-ui/layout'
 
 import Layout from 'components/Layout'
 import Pagination from 'components/Pagination'
@@ -9,6 +9,7 @@ import CardHolder from 'components/CardHolder'
 import { SkeletonLoader } from 'components/Loader'
 import { useFetchCardsQuery } from 'features/pokemonTCGAPI/pokemon-tcg-api-slice'
 import Cart from 'features/cart/Cart'
+import { Alert, AlertIcon } from '@chakra-ui/alert'
 
 export default function Home() {
   const [inputName, setInputName] = useState('')
@@ -42,6 +43,8 @@ export default function Home() {
           gap={6}
           mt="2"
           mb="12"
+          maxW="3xl"
+          mx="auto"
         >
           <SearchByName
             value={inputName}
@@ -65,7 +68,10 @@ export default function Home() {
                 />
               </>
             ) : (
-              <Text>The search has returned nothing...</Text>
+              <Alert status="warning">
+                <AlertIcon />
+                No Pokemon match the search parameters :(
+              </Alert>
             )}
           </>
         </SkeletonLoader>
