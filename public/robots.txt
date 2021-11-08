@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /api
+Host: https://redux-pokemon-tcg-shop.dastasoft.com/
+Sitemap: https://redux-pokemon-tcg-shop.dastasoft.com/sitemap.xml
