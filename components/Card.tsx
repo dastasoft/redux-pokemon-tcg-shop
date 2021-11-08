@@ -11,6 +11,7 @@ import { MdAddShoppingCart, MdRemoveShoppingCart } from 'react-icons/md'
 import { IPokemonCard } from 'types'
 
 interface ICard extends IPokemonCard {
+  flavor?: 'card' | 'item'
   onAdd?: () => void
   onRemove?: () => void
 }
@@ -23,14 +24,20 @@ export default function Card({
   images,
   cardmarket,
   rarity,
-  onAdd,
-  onRemove,
+  flavor = 'card',
+  onAdd = () => {},
+  onRemove = () => {},
 }: ICard) {
   const bgColor = useColorModeValue('gray.200', 'gray.700')
   const [secondary, tertiary] = useToken('colors', ['secondary', 'tertiary'])
   const color = useColorModeValue(tertiary, secondary)
   const controls = useAnimation()
   const [ref, inView] = useInView()
+
+  const onRemoveHandler = () => {
+    controls.start({ opacity: 0, scale: 0 })
+    setTimeout(() => onRemove(), 500)
+  }
 
   useEffect(() => {
     if (inView) {
@@ -45,10 +52,14 @@ export default function Card({
       bgColor={bgColor}
       borderRadius="xl"
       initial="hidden"
-      variants={{
-        hidden: { opacity: 0, scale: 0 },
-        show: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-      }}
+      variants={
+        flavor === 'card'
+          ? {
+              hidden: { opacity: 0, scale: 0 },
+              show: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+            }
+          : {}
+      }
       ref={ref}
       animate={controls}
     >
@@ -68,10 +79,12 @@ export default function Card({
       </Box>
 
       <Button
-        leftIcon={onAdd ? <MdAddShoppingCart /> : <MdRemoveShoppingCart />}
+        leftIcon={
+          flavor === 'card' ? <MdAddShoppingCart /> : <MdRemoveShoppingCart />
+        }
         colorScheme="teal"
         variant="pkmn"
-        onClick={onAdd || onRemove}
+        onClick={flavor === 'card' ? onAdd : onRemoveHandler}
         mt="2"
       >
         ${cardmarket?.prices?.averageSellPrice}
