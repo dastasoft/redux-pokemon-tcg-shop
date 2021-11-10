@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { IPokemonCard } from 'types'
+import { IPokemonCard } from 'components/Card'
 
 export interface IStoredPokemonCard extends IPokemonCard {
   uuid: string
@@ -25,10 +25,7 @@ const cartSlice = createSlice({
       state.cards.push(pokemonCard)
       state.totalPrice = Number(
         state.cards
-          .reduce(
-            (acc, curr) => acc + curr.cardmarket.prices.averageSellPrice,
-            0
-          )
+          .reduce((acc, curr) => acc + curr.cardmarket.prices.avg30, 0)
           .toFixed(2)
       )
     },
@@ -39,10 +36,7 @@ const cartSlice = createSlice({
       state.cards = cards
       state.totalPrice = Number(
         state.cards
-          .reduce(
-            (acc, curr) => acc + curr.cardmarket.prices.averageSellPrice,
-            0
-          )
+          .reduce((acc, curr) => acc + curr.cardmarket.prices.avg30, 0)
           .toFixed(2)
       )
     },

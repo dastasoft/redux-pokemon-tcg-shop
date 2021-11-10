@@ -2,9 +2,8 @@ import { Dispatch, SetStateAction } from 'react'
 import { IconButton } from '@chakra-ui/button'
 import { SearchIcon } from '@chakra-ui/icons'
 import { Input } from '@chakra-ui/input'
-import { Box, Flex, Heading, Spacer } from '@chakra-ui/layout'
-
-export interface ISearchByName {
+import { Box, Flex, Heading } from '@chakra-ui/layout'
+interface ISearchByName {
   value: string
   onChange: Dispatch<SetStateAction<string>>
   onSearch: () => void

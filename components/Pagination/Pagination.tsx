@@ -11,7 +11,7 @@ import {
 
 const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
-export interface IPagination {
+interface IPagination {
   page: number
   pageSize?: number
   totalCount?: number

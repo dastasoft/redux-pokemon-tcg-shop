@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { ORDER_BY } from 'components/OrderBy'
-import { IResponse } from 'types'
+import { ORDER_BY } from './OrderBy'
+import { IResponse } from './types'
 
 interface IQueryParams {
   name?: string
@@ -14,11 +14,6 @@ export const apiSlice = createApi({
   reducerPath: 'pokemon-tcg-api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.pokemontcg.io/v2',
-    // prepareHeaders(headers) {
-    //   headers.set('x-api-key', process.env.API_KEY)
-
-    //   return headers
-    // },
   }),
   endpoints(builder) {
     return {

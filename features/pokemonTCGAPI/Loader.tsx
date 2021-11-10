@@ -2,11 +2,11 @@ import { ReactChild } from 'react'
 import { Flex, SimpleGrid } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 
-import CardSekeleton from './CardSekeleton'
-import PaginationSekeleton from './PaginationSekeleton'
+import { CardSkeleton } from 'components/Card'
+import { PaginationSkeleton } from 'components/Pagination'
 import NotFound from './NotFound'
 
-export interface ILoader {
+interface ILoader {
   isLoading: boolean
   isError: boolean
   children: ReactChild
@@ -38,10 +38,10 @@ export const SkeletonLoader = ({ isLoading, isError, children }: ILoader) => {
       <>
         <SimpleGrid columns={[1, 2, 2, 3, 5]} spacing="2rem" my="2">
           {Array.from({ length: 20 }, (_e, i) => i).map((_el, index) => (
-            <CardSekeleton key={index} />
+            <CardSkeleton key={index} />
           ))}
         </SimpleGrid>
-        <PaginationSekeleton />
+        <PaginationSkeleton />
       </>
     )
   }

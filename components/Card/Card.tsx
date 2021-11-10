@@ -8,7 +8,7 @@ import { useInView } from 'react-intersection-observer'
 import { motion, useAnimation } from 'framer-motion'
 import { MdAddShoppingCart, MdRemoveShoppingCart } from 'react-icons/md'
 
-import { IPokemonCard } from 'types'
+import { IPokemonCard } from './types'
 
 interface ICard extends IPokemonCard {
   flavor?: 'card' | 'item'

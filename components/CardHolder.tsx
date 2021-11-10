@@ -1,13 +1,12 @@
 import { SimpleGrid } from '@chakra-ui/layout'
 import { v4 as uuidv4 } from 'uuid'
-
-import { useAppDispatch, useAppSelector } from 'app/hooks'
-import { addItem } from 'features/cart/cart-slice'
-import Card from './Card'
-import { IPokemonCard } from 'types'
 import { useToast } from '@chakra-ui/toast'
 
-export interface ICardHolder {
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+import Card, { IPokemonCard } from 'components/Card'
+import { addItem } from 'features/cart/cart-slice'
+
+interface ICardHolder {
   data: IPokemonCard[] | undefined
 }
 

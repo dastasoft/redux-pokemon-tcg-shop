@@ -6,7 +6,7 @@ import { MdShoppingCart } from 'react-icons/md'
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 
 import { useAppSelector } from 'app/hooks'
-import Logo from 'components/Logo'
+import Logo from './Logo'
 
 interface IHeader {
   btnRef: MutableRefObject<HTMLButtonElement>

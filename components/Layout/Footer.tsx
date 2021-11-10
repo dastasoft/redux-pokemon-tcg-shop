@@ -2,8 +2,8 @@ import { Flex, Stack } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/layout'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 
-import Logo from 'components/Logo'
-import SocialMediaLinks from 'components/SocialMediaLinks'
+import Logo from './Logo'
+import SocialMediaLinks from './SocialMediaLinks'
 
 export default function Footer() {
   return (
