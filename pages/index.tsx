@@ -7,9 +7,9 @@ import SearchByName from 'components/SearchByName'
 import OrderBy, { ORDER_BY } from 'components/OrderBy'
 import CardHolder from 'components/CardHolder'
 import { SkeletonLoader } from 'components/Loader'
+import NotFound from 'components/NotFound'
 import { useFetchCardsQuery } from 'features/pokemonTCGAPI/pokemon-tcg-api-slice'
 import Cart from 'features/cart/Cart'
-import { Alert, AlertIcon } from '@chakra-ui/alert'
 
 export default function Home() {
   const [inputName, setInputName] = useState('')
@@ -68,10 +68,7 @@ export default function Home() {
                 />
               </>
             ) : (
-              <Alert status="warning">
-                <AlertIcon />
-                No Pokemon match the search parameters :(
-              </Alert>
+              <NotFound />
             )}
           </>
         </SkeletonLoader>

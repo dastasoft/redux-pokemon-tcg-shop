@@ -4,7 +4,7 @@ import { Spinner } from '@chakra-ui/spinner'
 
 import CardSekeleton from './CardSekeleton'
 import PaginationSekeleton from './PaginationSekeleton'
-import { Alert, AlertIcon } from '@chakra-ui/alert'
+import NotFound from './NotFound'
 
 export interface ILoader {
   isLoading: boolean
@@ -27,14 +27,7 @@ export default function Loader({ isLoading, isError, children }: ILoader) {
     )
   }
 
-  if (isError) {
-    return (
-      <Alert status="warning">
-        <AlertIcon />
-        No Pokemon match the search parameters :(
-      </Alert>
-    )
-  }
+  if (isError) return <NotFound />
 
   return <>{children}</>
 }
@@ -53,14 +46,7 @@ export const SkeletonLoader = ({ isLoading, isError, children }: ILoader) => {
     )
   }
 
-  if (isError) {
-    return (
-      <Alert status="warning">
-        <AlertIcon />
-        No Pokemon match the search parameters :(
-      </Alert>
-    )
-  }
+  if (isError) return <NotFound />
 
   return <>{children}</>
 }

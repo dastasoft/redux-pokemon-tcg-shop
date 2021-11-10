@@ -9,6 +9,8 @@ import {
   MdLastPage,
 } from 'react-icons/md'
 
+const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+
 export interface IPagination {
   page: number
   pageSize?: number
@@ -32,18 +34,22 @@ export default function Pagination({
 
   const onFirstHandler = () => {
     onPageChange(1)
+    scrollTop()
   }
 
   const onPrevHandler = () => {
     onPageChange(page - 1)
+    scrollTop()
   }
 
   const onNextHandler = () => {
     onPageChange(page + 1)
+    scrollTop()
   }
 
   const onLastHandler = () => {
     onPageChange(totalPages)
+    scrollTop()
   }
 
   return (
@@ -70,7 +76,7 @@ export default function Pagination({
           py="2"
           borderRadius="md"
         >
-          Page {page} of {totalPages}
+          {page} of {totalPages}
         </Text>
         <IconButton
           variant="pkmn"

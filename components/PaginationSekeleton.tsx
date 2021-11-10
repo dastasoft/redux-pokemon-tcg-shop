@@ -12,7 +12,7 @@ export default function PaginationSekeleton() {
       <HStack spacing="2" minW="fit-content" mr="2">
         <Skeleton height="40px" width="40px" {...colors} />
         <Skeleton height="40px" width="40px" {...colors} />
-        <Skeleton height="42px" width="145px" {...colors} />
+        <Skeleton height="42px" width="90px" {...colors} />
         <Skeleton height="40px" width="40px" {...colors} />
         <Skeleton height="40px" width="40px" {...colors} />
       </HStack>

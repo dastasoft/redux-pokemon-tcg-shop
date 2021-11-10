@@ -6,7 +6,7 @@ export interface IResponse {
   totalCount: number
 }
 
-// Simplified version of the real response
+// Simplified version of the real response (https://docs.pokemontcg.io/api-reference/cards/card-object)
 export interface IPokemonCard {
   id: string
   name: string
@@ -17,7 +17,7 @@ export interface IPokemonCard {
   }
   cardmarket: {
     prices: {
-      averageSellPrice: number
+      avg30: number
     }
   }
 }

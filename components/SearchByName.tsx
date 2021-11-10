@@ -25,15 +25,18 @@ export default function SearchByName({
           placeholder="Name"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          mr="2"
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') onSearch()
+          }}
+          borderRightRadius="0"
         />
-        <Spacer />
         <IconButton
           variant="pkmn"
           aria-label="Search database"
           icon={<SearchIcon />}
           onClick={onSearch}
           colorScheme="teal"
+          borderLeftRadius="0"
         />
       </Flex>
     </Box>

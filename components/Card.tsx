@@ -87,7 +87,7 @@ export default function Card({
         onClick={flavor === 'card' ? onAdd : onRemoveHandler}
         mt="2"
       >
-        ${cardmarket?.prices?.averageSellPrice}
+        {cardmarket?.prices?.avg30}€
       </Button>
     </MotionFlex>
   )
