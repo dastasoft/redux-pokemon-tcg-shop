@@ -18,7 +18,7 @@ const config = {
     site_name: 'pokemonTCGShop',
     images: [
       {
-        url: 'https://redux-pokemon-tcg-shop.com/assets/logo.jpg',
+        url: 'https://redux-pokemon-tcg-shop.dastasoft.com/assets/logo.jpg',
         width: 200,
         height: 200,
         alt: 'Pokemon TCG Shop',

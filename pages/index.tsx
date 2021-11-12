@@ -16,7 +16,7 @@ export default function Home() {
   const [name, setName] = useState('')
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(20)
-  const [orderBy, setOrderBy] = useState(ORDER_BY.SET_RELEASE_DATE)
+  const [orderBy, setOrderBy] = useState(ORDER_BY.AVERAGE_SELL_PRICE)
 
   const { data, isFetching, isLoading, isError } = useFetchCardsQuery({
     name,

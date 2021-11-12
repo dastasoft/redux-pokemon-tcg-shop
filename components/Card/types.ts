@@ -9,7 +9,7 @@ export interface IPokemonCard {
   }
   cardmarket: {
     prices: {
-      avg30: number
+      averageSellPrice: number
     }
   }
 }

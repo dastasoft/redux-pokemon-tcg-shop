@@ -4,7 +4,7 @@ import { Select } from '@chakra-ui/select'
 
 export const enum ORDER_BY {
   SET_RELEASE_DATE = '-set.releaseDate',
-  AVERAGE_SELL_PRICE = '-cardmarket.prices.avg30',
+  AVERAGE_SELL_PRICE = '-cardmarket.prices.averageSellPrice',
   NATIONAL_POKEDEX_NUMBER = '-nationalPokedexNumbers',
 }
 
@@ -20,10 +20,8 @@ export default function OrderBy({ value, onChange }: IOrderBy) {
         Order By
       </Heading>
       <Select value={value} onChange={(e: any) => onChange(e.target.value)}>
+        <option value={ORDER_BY.AVERAGE_SELL_PRICE}>Average Sell Price</option>
         <option value={ORDER_BY.SET_RELEASE_DATE}>Set Release Date</option>
-        <option value={ORDER_BY.AVERAGE_SELL_PRICE}>
-          Average Sell Price (Last 30 days)
-        </option>
         <option value={ORDER_BY.NATIONAL_POKEDEX_NUMBER}>
           National Pokedex Number
         </option>
