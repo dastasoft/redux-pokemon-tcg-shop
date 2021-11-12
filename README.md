@@ -3,7 +3,7 @@
     <h1>Pokemon TCG Shop</h1>
 </div>
 
-Pokemon TCG Shop is a fictional product to provide a demo about how to use [Redux Toolkit]() to manage client and server state.
+Pokemon TCG Shop is a fictional product to provide a demo about how to use [Redux Toolkit](https://redux-toolkit.js.org/) to manage client and server state.
 
 - 🚀 The project is made with [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/), [ChakraUI](https://chakra-ui.com/) and [Framer Motion](https://www.framer.com/motion/)
 - 💿 Data is fetched from the [Pokemon TCG API](https://docs.pokemontcg.io/)
