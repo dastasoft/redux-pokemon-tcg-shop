@@ -25,7 +25,10 @@ const cartSlice = createSlice({
       state.cards.push(pokemonCard)
       state.totalPrice = Number(
         state.cards
-          .reduce((acc, curr) => acc + curr.cardmarket.prices.averageSellPrice, 0)
+          .reduce(
+            (acc, curr) => acc + curr.cardmarket.prices.averageSellPrice,
+            0
+          )
           .toFixed(2)
       )
     },
