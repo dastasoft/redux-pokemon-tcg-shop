@@ -15,10 +15,13 @@ import Card from 'components/Card'
 import { removeItem } from './cart-slice'
 
 export default function Cart() {
-  const { cards, totalPrice } = useAppSelector((state) => state.cart)
+  const { cards } = useAppSelector((state) => state.cart)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const dispatch = useAppDispatch()
   const areCards = cards.length > 0
+  const totalPrice = cards
+    .reduce((acc, card) => acc + card.cardmarket.prices.averageSellPrice, 0)
+    .toFixed(2)
 
   return (
     <>

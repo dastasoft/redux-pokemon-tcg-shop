@@ -7,12 +7,10 @@ export interface IStoredPokemonCard extends IPokemonCard {
 }
 interface CartState {
   cards: IStoredPokemonCard[]
-  totalPrice: number
 }
 
 const initialState: CartState = {
   cards: [],
-  totalPrice: 0,
 }
 
 const cartSlice = createSlice({
@@ -23,28 +21,12 @@ const cartSlice = createSlice({
       const pokemonCard = action.payload
 
       state.cards.push(pokemonCard)
-      state.totalPrice = Number(
-        state.cards
-          .reduce(
-            (acc, curr) => acc + curr.cardmarket.prices.averageSellPrice,
-            0
-          )
-          .toFixed(2)
-      )
     },
     removeItem(state, action: PayloadAction<string>) {
       const pokemonCardUUID = action.payload
       const cards = state.cards.filter(({ uuid }) => uuid !== pokemonCardUUID)
 
       state.cards = cards
-      state.totalPrice = Number(
-        state.cards
-          .reduce(
-            (acc, curr) => acc + curr.cardmarket.prices.averageSellPrice,
-            0
-          )
-          .toFixed(2)
-      )
     },
   },
 })
