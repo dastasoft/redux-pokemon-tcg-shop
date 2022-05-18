@@ -1,10 +1,8 @@
-import { useEffect } from 'react'
 import NextImage from 'next/image'
 import { Button } from '@chakra-ui/button'
 import { Badge, Box, Flex, FlexProps, Heading } from '@chakra-ui/layout'
 import { useColorModeValue } from '@chakra-ui/color-mode'
 import { useToken } from '@chakra-ui/system'
-import { useInView } from 'react-intersection-observer'
 import { motion, useAnimation } from 'framer-motion'
 import { MdAddShoppingCart, MdRemoveShoppingCart } from 'react-icons/md'
 
@@ -17,6 +15,10 @@ interface ICard extends IPokemonCard {
 }
 
 const MotionFlex = motion<FlexProps>(Flex)
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0 },
+  show: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+}
 
 export default function Card({
   id,
@@ -32,18 +34,15 @@ export default function Card({
   const [secondary, tertiary] = useToken('colors', ['secondary', 'tertiary'])
   const color = useColorModeValue(tertiary, secondary)
   const controls = useAnimation()
-  const [ref, inView] = useInView()
 
-  const onRemoveHandler = () => {
-    controls.start({ opacity: 0, scale: 0 })
-    setTimeout(() => onRemove(), 500)
+  const onRemoveHandler = async () => {
+    await controls.start({
+      opacity: 0,
+      scale: 0,
+      transition: { duration: 0.5 },
+    })
+    onRemove()
   }
-
-  useEffect(() => {
-    if (inView) {
-      controls.start('show')
-    }
-  }, [controls, inView])
 
   return (
     <MotionFlex
@@ -52,19 +51,13 @@ export default function Card({
       bgColor={bgColor}
       borderRadius="xl"
       initial="hidden"
-      variants={
-        flavor === 'card'
-          ? {
-              hidden: { opacity: 0, scale: 0 },
-              show: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-            }
-          : {}
-      }
-      ref={ref}
+      variants={flavor === 'card' ? cardVariants : {}}
       animate={controls}
+      whileInView="show"
+      viewport={{ once: true }}
     >
       <Flex justifyContent="space-between" alignItems="center" p="2">
-        <Heading as="h2" size="md" isTruncated>
+        <Heading as="h2" size="md">
           {name}
         </Heading>
         <Badge variant="outline" color={color}>
