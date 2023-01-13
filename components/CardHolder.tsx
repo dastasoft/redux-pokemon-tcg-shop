@@ -1,4 +1,4 @@
-import { SimpleGrid } from '@chakra-ui/layout'
+import { Grid } from '@chakra-ui/layout'
 import { v4 as uuidv4 } from 'uuid'
 import { useToast } from '@chakra-ui/toast'
 
@@ -28,10 +28,14 @@ export default function CardHolder({ data }: ICardHolder) {
   }
 
   return (
-    <SimpleGrid columns={[1, 2, 2, 3, 5]} spacing="2rem" my="2">
+    <Grid
+      templateColumns="repeat(auto-fill, minmax(20rem, 1fr))"
+      gap={6}
+      my="2"
+    >
       {data?.map((card) => {
         return <Card key={card.id} {...card} onAdd={() => onAddHandler(card)} />
       })}
-    </SimpleGrid>
+    </Grid>
   )
 }

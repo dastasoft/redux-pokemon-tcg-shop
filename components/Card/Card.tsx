@@ -57,7 +57,7 @@ export default function Card({
       viewport={{ once: true }}
     >
       <Flex justifyContent="space-between" alignItems="center" p="2">
-        <Heading as="h2" size="md">
+        <Heading as="h2" size="md" noOfLines={1}>
           {name}
         </Heading>
         <Badge variant="outline" color={color}>
@@ -65,9 +65,15 @@ export default function Card({
         </Badge>
       </Flex>
 
-      <Box minH={['md', 'xs', 'xl', 'md', 'xs']} position="relative">
+      <Box>
         {images.small && (
-          <NextImage src={images.small} alt={name} layout="fill" />
+          <NextImage
+            src={images.small}
+            alt={name}
+            layout="responsive"
+            width="100%"
+            height="100%"
+          />
         )}
       </Box>
 
